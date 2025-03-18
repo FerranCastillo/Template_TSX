@@ -9,6 +9,12 @@ import FormularioEffect from './useEffect/Formulario';
 import ListaBotonEffect from './useEffect/ListaBoton';
 import MostrarOcultarEffect from './useEffect/MostrarOcultar';
 
+export interface User {
+  name: string;
+  age: number;
+  profession?: string;
+}
+
 export const Solucion: React.FC<{ exercice: number }> = (props) => {
   let users = [
     { name: 'Ruben', age: 20 },
@@ -144,13 +150,12 @@ export const Ejercicio4 = (props) => {
   );
 };
 
-export const Ejercicio5 = (props) => {
+export const Ejercicio5: React.FC<{ users: User[] }> = (props) => {
   return (
     <div className="user-list">
       <div className="bold">Uso de rest del objeto usuario dentro del listado (Explicar rest en un objeto)</div>
       <hr />
       {props.users.map(({ name, ...rest }, index) => {
-        console.log(rest);
         return (
           <div key={index} className="user-wrapper">
             <UserInfo name={name} {...rest} onClick={() => alert('Soy ' + name)} />

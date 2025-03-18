@@ -1,7 +1,8 @@
 import React from 'react';
 import UserInfo from './UserInfo';
+import { User } from '../Ejercicios';
 
-const UsersList: React.FC = (props) => {
+const UsersList: React.FC<{ users: User[] }> = (props) => {
   return (
     <div className="user-list">
       <hr />

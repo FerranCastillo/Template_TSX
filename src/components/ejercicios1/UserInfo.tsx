@@ -1,11 +1,18 @@
 import React from 'react';
 
-const UserInfo: React.FC = (props) => {
+interface UserInfoProps {
+  name: string;
+  age?: number;
+  profession?: string;
+  onClick?: () => void;
+}
+
+const UserInfo: React.FC<UserInfoProps> = ({ profession = 'Programador', ...props }) => {
   return (
     <div>
       <div>Nombre: {props.name}</div>
       <div>Edad: {props.age}</div>
-      {props.profession && <div>Profesión: {props.profession}</div>}
+      {profession && <div>Profesión: {profession}</div>}
       {props.onClick && <button onClick={() => props.onClick()}>Click</button>}
     </div>
   );

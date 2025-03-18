@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Formulario: React.FC = () => {
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<any>();
 
   useEffect(() => {
     setLoading(true);
