@@ -1,48 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { IUser } from '../../interfaces/users/IUser';
 
-const Formulario: React.FC = () => {
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<any>();
+interface FormularioProps {
+  user: IUser;
+  onSubmit: () => void;
+  onUserChange: (event) => void;
+}
 
-  useEffect(() => {
-    setLoading(true);
-    // eslint-disable-next-line no-undef
-    setTimeout(() => {
-      // eslint-disable-next-line no-undef
-      fetch('https://jsonplaceholder.typicode.com/users/1')
-        .then((response) => response.json())
-        .then((data) => setUser(data))
-        .finally(() => {
-          setLoading(false);
-        });
-    }, 2000);
-  }, []);
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
-  };
-
+const Formulario: React.FC<FormularioProps> = ({ user, ...props }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(user);
+    props.onSubmit();
   };
 
-  if (loading) return <p>Cargando usuario...</p>;
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        Nombre: <input type="text" name="name" value={user.name || ''} onChange={handleChange} placeholder="Nombre" />
+        Nombre:{' '}
+        <input type="text" name="name" value={user.name || ''} onChange={props.onUserChange} placeholder="Nombre" />
       </div>
       <div>
         Telefono:{' '}
-        <input type="text" name="phone" value={user.phone || ''} onChange={handleChange} placeholder="Teléfono" />
+        <input type="text" name="phone" value={user.phone || ''} onChange={props.onUserChange} placeholder="Teléfono" />
       </div>
       <div>
-        Email: <input type="text" name="email" value={user.email || ''} onChange={handleChange} placeholder="Email" />
+        Email:{' '}
+        <input type="text" name="email" value={user.email || ''} onChange={props.onUserChange} placeholder="Email" />
       </div>
       <h3>Información del usuario</h3>
       <p>
