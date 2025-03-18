@@ -1,4 +1,3 @@
-import UserInfo from './ejercicios1/UserInfo';
 import Contador from './useState/Contador';
 import Formulario from './useState/Formulario';
 import ListaBoton from './useState/ListaBoton';
@@ -9,7 +8,7 @@ import FormularioEffect from './useEffect/Formulario';
 import ListaBotonEffect from './useEffect/ListaBoton';
 import MostrarOcultarEffect from './useEffect/MostrarOcultar';
 
-export interface User {
+interface User {
   name: string;
   age: number;
   profession?: string;
@@ -51,6 +50,24 @@ export const Solucion: React.FC<{ exercice: number }> = (props) => {
       <hr />
       {ejercicios[props.exercice - 1]}
     </>
+  );
+};
+
+interface UserInfoProps {
+  name: string;
+  age?: number;
+  profession?: string;
+  onClick?: () => void;
+}
+
+const UserInfo: React.FC<UserInfoProps> = ({ profession = 'Programador', ...props }) => {
+  return (
+    <div>
+      <div>Nombre: {props.name}</div>
+      <div>Edad: {props.age}</div>
+      {profession && <div>Profesión: {profession}</div>}
+      {props.onClick && <button onClick={() => props.onClick()}>Click</button>}
+    </div>
   );
 };
 
